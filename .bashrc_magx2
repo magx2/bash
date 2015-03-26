@@ -57,8 +57,8 @@ alias unstash="git stash apply"
 alias stash="git stash"
 
 # GIT propmt
-export PS1='${debian_chroot:+($debian_chroot)}\u:\w$(__git_ps1 " |%s|")\$ '
-export GIT_PS1_SHOWDIRTYSTATE=asdf
+# export PS1='${debian_chroot:+($debian_chroot)}\u:\w$(__git_ps1 " |%s|")\$ '
+# export GIT_PS1_SHOWDIRTYSTATE=asdf
 
 # Extracting files
 extract () {
