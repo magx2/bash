@@ -94,3 +94,33 @@ extract () {
 
 
 alias c=clear
+
+health_check() {
+	while [[ $# > 0 ]]
+	do
+	key="$1"
+
+	case $key in
+	    --url)
+	    shift # past argument
+	    local url=$1
+	    ;;
+	    --token)
+	    shift # past argument
+	    local token=$1
+	    ;;
+	esac
+	shift # past argument or value
+	done
+
+	if [ -z "$url" ]; then echo "Please set URL via --url <url> option!"; return 1; fi
+	if [ -z "$token" ]; then echo "Please set Pushbullet token via --token <token> option!"; return 2; fi
+
+	local response_code=$(curl -s -o /dev/null -w "%{http_code}" $url)
+
+	if [[ ! "$response_code" == 2* ]] && [[ ! "$response_code" == 3* ]];
+	then
+		curl -s -u $token: https://api.pushbullet.com/v2/pushes -d type=note -d title="Fuckup - $url" -d body="Site is not online! Returned code equals $response_code!" > /dev/null
+		return $response_code
+	fi
+}
