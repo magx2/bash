@@ -95,6 +95,14 @@ extract () {
 
 alias c=clear
 
+pid() {
+	pgrep -f $1
+}
+
+kill_pid() {
+	kill -9 $(pid $1)
+}
+
 health_check() {
 	while [[ $# > 0 ]]
 	do
@@ -124,3 +132,4 @@ health_check() {
 		return $response_code
 	fi
 }
+
