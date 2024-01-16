@@ -8,6 +8,8 @@ echo $'
                 /____/            
 '
 
+alias cls="clear"
+
 # Aliases for fast moving around folders
 alias ..="cd .."
 alias ..2="cd ../.."
